@@ -1,0 +1,554 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO & CONFIGURACIÓN BASE (Color favorito: Verde)
+   ========================================================================== */
+:root {
+    --verde-principal: #1b4d3e;   /* Verde esmeralda profundo */
+    --verde-brillante: #2ec4b6;   /* Turquesa/Verde vivo para destacar */
+    --verde-claro: #e8f5e9;       /* Fondo suave */
+    --blanco: #ffffff;
+    --oscuro: #111827;            /* Gris casi negro para contraste */
+    --gris-texto: #4b5563;
+    --fuente-titulos: 'Dancing Script', cursive;
+    --fuente-base: 'Poppins', sans-serif;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--fuente-base);
+    background-color: #fafdfb;
+    color: var(--oscuro);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Contenedor de partículas flotantes (Zorritos/Corazones) */
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 99;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   2. PANTALLA DE BIENVENIDA (INTRO)
+   ========================================================================== */
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--verde-principal), #0a2f24);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.intro-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.intro-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    max-width: 90%;
+    width: 400px;
+    transform: scale(1);
+    animation: pulseCard 2s infinite alternate;
+}
+
+.fox-avatar {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.intro-card h1 {
+    font-family: var(--fuente-titulos);
+    color: var(--verde-principal);
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+}
+
+.intro-card p {
+    color: var(--gris-texto);
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+/* ==========================================================================
+   3. BOTONES Y ELEMENTOS DE CONTROL
+   ========================================================================== */
+.btn-primary, .btn-secondary {
+    font-family: var(--fuente-base);
+    font-weight: 600;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--verde-principal), var(--verde-brillante));
+    color: var(--blanco);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(46, 196, 182, 0.4);
+}
+
+.btn-secondary {
+    background: #ff9f1c; /* Color dulce para la dinámica del abrazo */
+    color: var(--blanco);
+}
+
+.btn-secondary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 159, 28, 0.5);
+}
+
+/* Reproductor de música flotante */
+.music-player-fixed {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(27, 77, 62, 0.1);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+#btn-play-pause {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    background: var(--verde-principal);
+    color: var(--blanco);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ==========================================================================
+   4. SECCIÓN HERO (PORTADA)
+   ========================================================================== */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(27, 77, 62, 0.7), rgba(17, 24, 39, 0.85)), 
+                url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--blanco);
+    padding: 0 20px;
+    position: relative;
+}
+
+.badge {
+    background: var(--verde-brillante);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.main-title {
+    font-family: var(--fuente-titulos);
+    font-size: 4.5rem;
+    line-height: 1.1;
+    margin: 20px 0;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.highlight {
+    color: var(--verde-brillante);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    font-style: italic;
+    max-width: 650px;
+    margin: 0 auto;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* ==========================================================================
+   5. SECCIONES Y CONTENEDORES COMPARTIDOS
+   ========================================================================== */
+.section-container {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bg-light { background-color: var(--verde-claro); }
+.bg-dark { background-color: var(--oscuro); }
+.text-white { color: var(--blanco); }
+.text-center { text-align: center; }
+.text-green { color: var(--verde-brillante); }
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title h2 {
+    font-family: var(--fuente-titulos);
+    font-size: 3.5rem;
+    color: var(--verde-principal);
+}
+
+.bg-dark .section-title h2 {
+    color: var(--verde-brillante);
+}
+
+.section-title p {
+    color: var(--gris-texto);
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   6. DISEÑO DE TARJETAS (SOBRE ELLA & PSICOLOGÍA)
+   ========================================================================== */
+.grid-profile {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: var(--blanco);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--verde-brillante);
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--verde-principal);
+}
+
+.quote-box {
+    margin-top: 20px;
+    padding-left: 15px;
+    border-left: 4px solid var(--verde-brillante);
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+.quote-box small {
+    display: block;
+    margin-top: 5px;
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* Decoraciones extras de tarjetas */
+.card-emerald { border-top: 5px solid var(--verde-principal); }
+.card-light-green { border-top: 5px solid var(--verde-brillante); }
+.card-dark { background: #1f2937; color: #f3f4f6; }
+.card-dark h3 { color: var(--blanco); }
+
+/* ==========================================================================
+   7. SECCIÓN MULTIMEDIA (VIDEOS)
+   ========================================================================== */
+.music-grid {
+    display: flex;
+    justify-content: center;
+}
+
+.video-card {
+    background: var(--blanco);
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+}
+
+.video-card h3 {
+    color: var(--verde-principal);
+    margin-bottom: 10px;
+}
+
+.video-card p {
+    font-size: 0.95rem;
+    color: var(--gris-texto);
+    margin-bottom: 20px;
+}
+
+.video-responsive {
+    position: relative;
+    padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.video-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================================================
+   8. CARRUSEL / CONTENEDORES DE FAVORITOS
+   ========================================================================== */
+.carousel-favorites {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.fav-category {
+    background: var(--blanco);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.fav-category h3 {
+    font-size: 1.3rem;
+    color: var(--verde-principal);
+    border-bottom: 2px solid var(--verde-claro);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.fav-list {
+    list-style: none;
+}
+
+.fav-list li {
+    padding: 8px 0;
+    font-weight: 500;
+}
+
+.fav-item {
+    margin-bottom: 15px;
+}
+
+/* ==========================================================================
+   9. DINÁMICA DEL ABRAZO VIRTUAL
+   ========================================================================== */
+.hug-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hug-icon {
+    font-size: 3.5rem;
+    color: #ff9f1c;
+    margin-bottom: 15px;
+}
+
+.hug-box h2 {
+    font-family: var(--fuente-titulos);
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.hug-box p {
+    font-weight: 300;
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+.hug-message {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 1px dashed rgba(255,255,255,0.3);
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   10. PIE DE PÁGINA (FOOTER)
+   ========================================================================== */
+.footer {
+    background-color: #0b1320;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.footer strong {
+    color: var(--verde-brillante);
+}
+
+.copyright {
+    font-size: 0.8rem;
+    margin-top: 10px;
+    opacity: 0.5;
+}
+
+/* ==========================================================================
+   11. ANIMACIONES KEYFRAMES & EFECTOS DE MOVIMIENTO
+   ========================================================================== */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+}
+
+@keyframes pulseCard {
+    0% { transform: scale(0.98); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+    100% { transform: scale(1.02); box-shadow: 0 25px 60px rgba(0,0,0,0.4); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Clases dinámicas controladas por Javascript para aparición con scroll */
+.transition-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.transition-up.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Partículas animadas individuales */
+.particle {
+    position: absolute;
+    bottom: -50px;
+    font-size: 1.5rem;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.8;
+    user-select: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-105vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   12. MEDIA QUERIES (OPTIMIZACIÓN EXTREMA PARA CELULARES)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.8rem; /* Título más cómodo en pantallas pequeñas */
+    }
+    
+    .section-title h2 {
+        font-size: 2.6rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-container {
+        padding: 60px 15px; /* Menor espacio lateral en celulares */
+    }
+
+    .card {
+        padding: 25px 20px;
+    }
+
+    .music-player-fixed {
+        bottom: 10px;
+        left: 10px;
+        padding: 8px 12px;
+        font-size: 0.75rem;
+    }
+
+    .intro-card {
+        padding: 30px 20px;
+    }
+
+    .intro-card h1 {
+        font-size: 2.2rem;
+    }
+}
